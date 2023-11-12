@@ -34,3 +34,5 @@ Cada lançamento precisa de uma versão.
 * Criar um branch de release com a versão
 * Testar esse branch
 * "Lançar" esse release dando merge dessa branch na branch main.
+
+[Voltar](README.md)  

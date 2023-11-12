@@ -14,3 +14,5 @@ Funcionalidades novas adicionadas fazem essa versão subir.
 
 ## Patch
 Correções (hotfixes) fazem essa versão subir.
+
+[Voltar](README.md) 

@@ -29,10 +29,11 @@ Tipos de inputs aceitos: .txt (para suportar inserção manual), .cvs, .pdf, .of
 * Listagem de cada item com o identificador único, data e valor de cada Tag / grupo.
 
 # Versão 2.0
-Criar um programa com interface gráfica que utilizada tudo que a gente já implementou até agora. 
-Ter um forma para editar as entradas que foram geradas a partir dos arquivos, poder editar e adicionar manualmente. 
-Depois desse forma as entradas serão processadas, e depois de processadas poderão ser editadas (tags, preço, qualquer coisa). 
-Poder editar uma entrada (exemplo, mercado) e definir o que compõem aquela compra. 
-Editar tags e outros métodos de categorização diretamente na interface gráfica. 
-Usar os métodos já conhecidos para gerar os relatórios a partir de dados selecionados (tudo, meses, semana ou dia especifico). 
+Criar um programa com interface gráfica que utilizada tudo que a gente já implementou até agora.  
+Ter um forma para editar as entradas que foram geradas a partir dos arquivos, poder editar e adicionar manualmente.  
+Depois desse forma as entradas serão processadas, e depois de processadas poderão ser editadas (tags, preço, qualquer coisa).  
+Poder editar uma entrada (exemplo, mercado) e definir o que compõem aquela compra.  
+Editar tags e outros métodos de categorização diretamente na interface gráfica.  
+Usar os métodos já conhecidos para gerar os relatórios a partir de dados selecionados (tudo, meses, semana ou dia especifico).   
 
+[Voltar](README.md)  

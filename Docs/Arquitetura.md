@@ -27,3 +27,4 @@ Remover duplicações de entradas ou remover entradas que não devem estar e ser
 Aqui nós usamos a lista de lançamentos / entradas para criar todos tipo de relatórios. 
 O Trabalho aqui é simplesmente construir dados que representam os resultados que queremos mostrar nos relatórios usando o método de saída desejado. 
 
+[Voltar](README.md)  

@@ -21,3 +21,4 @@ Organização dos branchs do git e do desenvolvimento de novas funcionalidades e
 # Versionamento
 semântico customizado - avança de acordo com o lançamento de funcionalidades e correções.
 
+[Voltar](README.md)  
