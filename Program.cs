@@ -1,12 +1,13 @@
 ﻿using System;
 using BankData;
 using Processors;
-using Reports.PdfReports;
 using Reports.TextReports;
 using Reports.ConsoleReports;
 
-namespace Program {
-    public static class Program {
+namespace Program 
+{
+    public static class Program 
+    {
         public static int Main(string[] args)
         {   
             BuildCommandLineParamsResult buildCommandLineParamsResult = CommandLineParams.BuildCommandLineParamsFromArgs(args);
@@ -37,10 +38,7 @@ namespace Program {
                 Console.WriteLine("Após o processamento, não há lançamentos.");
                 return 0;
             }
-        
-            PdfReport pdfReport = new GeneralPdfReport();
-            pdfReport.Generate(processedBankDataList, "out.pdf");
-
+            
             TextReport textReport = new GeneralTextReport();
             textReport.Generate(processedBankDataList, "out.txt");
 
