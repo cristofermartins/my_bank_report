@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Linq.Expressions;
 using BankData;
 using Processors;
 using Reports.TextReports;
-using Reports.ConsoleReports;
-
 namespace Program 
 {
     public static class Program 
@@ -38,12 +37,13 @@ namespace Program
                 Console.WriteLine("Após o processamento, não há lançamentos.");
                 return 0;
             }
-            
-            TextReport textReport = new GeneralTextReport();
-            textReport.Generate(processedBankDataList, "out.txt");
 
-            ConsoleReport consoleReport = new GeneralConsoleReport();
-            consoleReport.Print(processedBankDataList);
+            TextReportFileBackEnd textReportFileBackEnd = new TextReportFileBackEnd("test.txt");
+            ITextReportBackend textReportConsoleBackEnd = new TextReportConsoleBackEnd();
+
+            ITextReport textReport = new GeneralTextReport();
+            textReport.Generate(processedBankDataList, textReportFileBackEnd);
+            textReport.Generate(processedBankDataList, textReportConsoleBackEnd);
     
             return 0;
         }

@@ -5,16 +5,28 @@ using Reports.TextReports;
 
 namespace Reports.TextReports
 {
-    public class GeneralTextReport : TextReport
+    public class GeneralTextReport : ITextReport
     {
-        public void Generate(in List<ProcessedBankData> processedBankDataList, in string outTextFileName)
+        public void Generate(in List<ProcessedBankData> processedBankDataList, in ITextReportBackend iTextReportBackend)
         {
-            using (StreamWriter streamWriter = File.CreateText(outTextFileName))
+            Dictionary<string, List<ProcessedBankData>> tagsDict = ReportsLib.BuildTagNameToProcessedBankDataList(processedBankDataList);
+            
+            tagsDict["Outros"] = ReportsLib.BuildNoTagProcessedBankDataList(processedBankDataList);
+
+            foreach (var entry in tagsDict)
             {
-                foreach (ProcessedBankData processedBankData in processedBankDataList)
+                double totalSpent = 0D;
+                foreach (var data in entry.Value)
                 {
-                    streamWriter.WriteLine(processedBankData.BankDataEntry.StringID);
+                    totalSpent += data.BankDataEntry.Value;
                 }
+
+                iTextReportBackend.WriteLine($"{entry.Key} total gasto: {totalSpent}");
+            }
+
+            foreach (var entry in tagsDict["Outros"])
+            {
+                iTextReportBackend.WriteLine($"{entry.BankDataEntry.StringID}, {entry.BankDataEntry.Value}");
             }
         }
     }
