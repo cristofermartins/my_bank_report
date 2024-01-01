@@ -1,0 +1,132 @@
+{
+    "Tags" : [
+        {
+            "Name" : "transporte",
+            "Description": "Transporte em geral"
+        },
+        {
+            "Name": "uber",
+            "Description": "Gastos com uber e 99"
+        },
+        {
+            "Name": "Mercados",
+            "Description": "Gastos com mercado em geral"
+        },
+        {
+            "Name": "Cantina Unisanta",
+            "Description": "Cantina da Unisanta que sempre vou"
+        },
+        {
+            "Name": "Restaurantes",
+            "Description": "Comer fora."
+        },
+        {
+            "Name": "Ifood",
+            "Description": "Ifood"
+        },
+        {
+            "Name": "Streaming",
+            "Description": "Hbo, netflix, etc"
+        },
+        {
+            "Name": "Hosts",
+            "Description": ""
+        },
+        {
+            "Name": "Produtos naturais",
+            "Description": ""
+        },
+        {
+            "Name": "Outros",
+            "Description": "Não classificado"
+        }
+    ],
+    "Taggers": [
+        {
+            "Name": "Uber conerShop",
+            "Weight": 100,
+            "Tags":
+            [
+                "Mercados"
+            ],
+            "Tests":
+            [
+                {
+                    "Name": "Uber ConerShop",
+                    "TextSub": "Uber *Cornershop"
+                }
+            ]
+        },
+        {
+            "Name": "Mercados geral",
+            "Weight": 100,
+            "Tags":
+            [
+                "Mercados"
+            ],
+            "Tests":
+            [
+                {
+                    "Name": "Carrefour",
+                    "TextSub": "CARREFOUR"
+                }
+            ]
+        },
+        {
+            "Name": "Streaming geral",
+            "Weight": 100,
+            "Tags":
+            [
+                "Streaming"
+            ],
+            "Tests":
+            [
+                {
+                    "Name": "Hbo",
+                    "TextSub": "Helphbomaxcom"
+                },
+                {
+                    "Name": "Netflix",
+                    "TextSub": "Netflix.Com"
+                }
+            ]
+        },
+        {
+            "Name": "Ubber tagger",
+            "Weight": 100,
+            "Tags": [
+                "uber",
+                "transporte"
+            ],
+            "Tests": [
+                {
+                    "Name": "Uber",
+                    "TextSub": "Uber *Uber *Trip"
+                },
+                {
+                    "Name": "Uber outro",
+                    "TextSub": "Uber *Trip Help.Uber.C"
+                },
+                {
+                    "Name": "99app",
+                    "TextSub": "99app *99app"
+                }
+            ]
+        },
+        {
+            "Name": "Ifood",
+            "Weight": 100,
+            "Tags":
+            [
+                "Ifood"
+            ],
+            "Tests":
+            [
+                {
+                    "Name": "Ifood",
+                    "TextSub": "Ifood *Ifd*"
+                }
+            ]
+        }
+    ]
+}

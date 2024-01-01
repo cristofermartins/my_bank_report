@@ -21,12 +21,12 @@ Tipos de inputs aceitos: .txt (para suportar inserção manual), .cvs, .pdf, .of
 * Gastos mensal, Gasto semanal (7 dias), Gasto diário.
 * Estatísticas de Cada grupo / categoria de compra (Quanto foi gasto por dia / semana / mês, e a percentagem de cada um).
 * Compras de cada grupo / categoria (Útil para identificar onde está indo o dinheiro, mas também para saber se a compra está sendo categorizada corretamente).
-* Gráfico de volume, mostrando o gasto total de cada grupo em relação ao gasto global.
-* Gráfico pizza que representa o total de gastos, com cada parte da pizza sendo um grupo, não pode haver gasto que pertence a dois grupos ou esse gráfico vai ficar zoado.
 * Total gasto no mês (do primeiro ao ultimo dia), gasto por dia e gasto por semana (7 dias).
 * Total do valor gasto por Tags / grupo (exemplo: uber/99, restaurantes, mercados) por mês, por semana (7 dias) e por dia.
 * mostrando o gasto total de cada Tag / grupo em relação ao gasto global mensal, semanal, diário.
 * Listagem de cada item com o identificador único, data e valor de cada Tag / grupo.
+* Gráfico de volume, mostrando o gasto total de cada grupo em relação ao gasto global.
+* Gráfico pizza que representa o total de gastos, com cada parte da pizza sendo um grupo, não pode haver gasto que pertence a dois grupos ou esse gráfico vai ficar zoado.
 
 # Versão 2.0
 Criar um programa com interface gráfica que utilizada tudo que a gente já implementou até agora.  
