@@ -10,6 +10,7 @@ namespace Program
         NO_INPUT_FILES = 1,
         INVALID_INPUT_FILE = 2,
         NO_TAGGERS_FILE = 3,
+        INVALID_REPORT_ORDER = 4,
     }
 
     public readonly record struct BuildCommandLineParamsResult
@@ -52,10 +53,13 @@ namespace Program
                     return "Não há arquivos para serem lidos na linha de comando.";
 
                 case BuildCommandLineParamsErrorEnum.INVALID_INPUT_FILE:
-                    return $"O arquivo {ExtraErrorMessage} não existe.";
+                    return $"O arquivo \"{ExtraErrorMessage}\" não existe.";
 
                 case BuildCommandLineParamsErrorEnum.NO_TAGGERS_FILE:
-                    return $"Arquivo {ExtraErrorMessage} com a configuração do sistema de tag não encontrado.";
+                    return $"Arquivo \"{ExtraErrorMessage}\" com a configuração do sistema de tag não encontrado.";
+
+                case BuildCommandLineParamsErrorEnum.INVALID_REPORT_ORDER:
+                    return $"Parametro de ordenamento de relatorio \"{ExtraErrorMessage}\" invalido.";
 
                 default:
                     return "DEFAULT ERROR CODE - WIP";
@@ -63,14 +67,26 @@ namespace Program
         }
     }
 
+    public enum ReportParamOrderEnum
+    {
+        NO_ORDER = 0,
+        ASCENDING = 1,
+        DESCENDING = 2,
+    }
+
     public record class CommandLineParams
     {
         public List<string> InputFiles {get; init;} = new List<string>();
         public string TaggerFileName {get; init;} = "";
+
+        public ReportParamOrderEnum ReportParamOrder {get; init;}
         public static BuildCommandLineParamsResult BuildCommandLineParamsFromArgs(string[] args)
         {
             const int PROCESSING_INPUT_FILES = 1;
             const int PROCESSING_TAGGER_FILE = 2;
+            const int PROCESSING_REPORT_PARAM_ORDER = 3;
+
+            ReportParamOrderEnum reportParamOrder = ReportParamOrderEnum.NO_ORDER;
 
             int processingState = 0;
 
@@ -88,6 +104,9 @@ namespace Program
                     case "-t":
                         processingState = PROCESSING_TAGGER_FILE;
                         break;
+                    case "-o":
+                        processingState = PROCESSING_REPORT_PARAM_ORDER;
+                        break;
                     default: 
                         switch (processingState)
                         {
@@ -102,6 +121,27 @@ namespace Program
 
                             case PROCESSING_TAGGER_FILE:
                                 taggerFileName = possibleCommand;   
+                                break;
+
+                            case PROCESSING_REPORT_PARAM_ORDER:
+                                if (possibleCommand == "a" || possibleCommand == "asc" || possibleCommand == "ascending") 
+                                {
+                                      reportParamOrder = ReportParamOrderEnum.ASCENDING;
+
+                                } 
+                                else if (possibleCommand == "d" || possibleCommand == "desc" || possibleCommand == "descending")
+                                {
+                                    reportParamOrder = ReportParamOrderEnum.DESCENDING;
+                                } 
+                                else if (possibleCommand == "no" || possibleCommand == "noorder") 
+                                {
+                                    reportParamOrder = ReportParamOrderEnum.NO_ORDER;
+                                } 
+                                else 
+                                {
+                                    return new BuildCommandLineParamsResult(BuildCommandLineParamsErrorEnum.INVALID_REPORT_ORDER, null, possibleCommand);
+                                }
+
                                 break;
 
                             default:
@@ -121,6 +161,8 @@ namespace Program
             {
                 return new BuildCommandLineParamsResult(BuildCommandLineParamsErrorEnum.NO_INPUT_FILES, null, "");
             }
+
+            Console.WriteLine(reportParamOrder.ToString());
         
             return new BuildCommandLineParamsResult
             (
@@ -128,7 +170,8 @@ namespace Program
                 new CommandLineParams
                 {
                     InputFiles = inputFiles,
-                    TaggerFileName = taggerFileName
+                    TaggerFileName = taggerFileName,
+                    ReportParamOrder = reportParamOrder,
                 },
                 ""
             );
