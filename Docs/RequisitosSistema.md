@@ -12,21 +12,21 @@ Tipos de inputs aceitos: .txt (para suportar inserção manual), .cvs, .pdf, .of
 ## Relatórios
 
 ### Métodos de saida
-* No console, para que a gente possa testar mais facilmente.
-* Relatórios de texto (relatórios .txt que sejam fáceis de ler, copiar e colar).
+* Relatórios de texto (escrito no console ou arquivo .txt).
 * Relatórios em PDF (Incluindo textos mas mais interessante gráficos).
-* Tabelas do excel.
+* Tabelas Excel / Calc.
 
-### O que pode ser inlcuido nos relatórios / tipos de relatórios
-* Gastos mensal, Gasto semanal (7 dias), Gasto diário.
-* Estatísticas de Cada grupo / categoria de compra (Quanto foi gasto por dia / semana / mês, e a percentagem de cada um).
-* Compras de cada grupo / categoria (Útil para identificar onde está indo o dinheiro, mas também para saber se a compra está sendo categorizada corretamente).
-* Gráfico de volume, mostrando o gasto total de cada grupo em relação ao gasto global.
-* Gráfico pizza que representa o total de gastos, com cada parte da pizza sendo um grupo, não pode haver gasto que pertence a dois grupos ou esse gráfico vai ficar zoado.
-* Total gasto no mês (do primeiro ao ultimo dia), gasto por dia e gasto por semana (7 dias).
-* Total do valor gasto por Tags / grupo (exemplo: uber/99, restaurantes, mercados) por mês, por semana (7 dias) e por dia.
-* mostrando o gasto total de cada Tag / grupo em relação ao gasto global mensal, semanal, diário.
-* Listagem de cada item com o identificador único, data e valor de cada Tag / grupo.
+### Modificadores do relatorio
+* Seleção do periodo - ultimo dia, ultimos 7 dias, ultimos 30 dias, entre uma data e outra, inlcuindo a opção dos meses do primeiro ao ultimo dia, também pode ser sem periodo, usando todos os dias disponiveis.  
+* Organizar itens por data ou do maior para o menor ou do menor para o maior.  
+
+### Tipos de relatorios
+* Relatorio de gastos medio: total do periodo, medio diario, medio semanal (7 dias), medio "mensal" (30 dias). (relatorio em .txt, .pdf e .csv).
+* Relatorio de gastos totais: Gasto de cada dia (e a %), gasto de cada semana (e a %), gasto de cada mês (e a %). (relatorio em .txt, .pdf e .csv).
+* Relatorio de gastos medio por tag: total do periodo, medio diario, medio semanal (7 dias), medio "mensal" (30 dias). Bater com medio de um periodo para descobrir a % em relação ao total. (relatorio em .txt, .pdf e .csv).  
+* Relatorio de gastos totais por tag: Gasto de cada dia (e a %), gasto de cada semana (e a %), gasto de cada mês (e a %). Bater com gastos de um periodo para descobrir a % em relação ao total. (relatorio em .txt, .pdf e .csv).  
+* Listagem de cada item organizado por cada Tag com o identificador único, data, valor e tags identificadas nessa compra. (relatorio em .txt, .pdf e .csv).   
+* Listagem de cada item com o identificador único, data, valor e tags identificadas nessa compra. (relatorio em .txt, .pdf e .csv).  
 
 # Versão 2.0
 Criar um programa com interface gráfica que utilizada tudo que a gente já implementou até agora.  
