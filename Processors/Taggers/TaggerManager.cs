@@ -49,7 +49,7 @@ namespace Processors.Taggers
 
                             if (Name != null && Weight != null)
                             {
-                                List<TagTest> testsList = new List<TagTest>();
+                                List<TaggerTest> testsList = new List<TaggerTest>();
                                 List<Tag> tagsList = new List<Tag>();
 
                                 if (jsonTagger.Tags != null)
@@ -72,7 +72,7 @@ namespace Processors.Taggers
                                         string? testTextSub = jsonTest.TextSub;
                                         if (testName != null && testTextSub != null)
                                         {
-                                            TagTest iTagTest = new TagTest
+                                            TaggerTest iTagTest = new TaggerTest
                                             {
                                                 Name = testName,
                                                 TextSub = testTextSub

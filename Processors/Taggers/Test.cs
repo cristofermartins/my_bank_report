@@ -2,7 +2,7 @@ using System;
 
 namespace Processors.Taggers
 {
-    public class TagTest
+    public class TaggerTest
     {
         public bool Test(string testString)
         {
