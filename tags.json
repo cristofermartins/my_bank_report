@@ -1,0 +1,42 @@
+[
+    {
+        "Name" : "transporte",
+        "Description": "Transporte em geral"
+    },
+    {
+        "Name": "uber",
+        "Description": "Gastos com uber e 99"
+    },
+    {
+        "Name": "Mercados",
+        "Description": "Gastos com mercado em geral"
+    },
+    {
+        "Name": "Cantina Unisanta",
+        "Description": "Cantina da Unisanta que sempre vou"
+    },
+    {
+        "Name": "Restaurantes",
+        "Description": "Comer fora."
+    },
+    {
+        "Name": "Ifood",
+        "Description": "Ifood"
+    },
+    {
+        "Name": "Streaming",
+        "Description": "Hbo, netflix, etc"
+    },
+    {
+        "Name": "Hosts",
+        "Description": ""
+    },
+    {
+        "Name": "Produtos naturais",
+        "Description": ""
+    },
+    {
+        "Name": "Outros",
+        "Description": "Não classificado"
+    }
+]

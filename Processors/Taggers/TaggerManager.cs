@@ -1,12 +1,17 @@
 using System;
-using System.Text.Json;
 using BankData;
+using Processors.Tags;
 
 namespace Processors.Taggers
 {
     using BankEntryList = List<BankDataEntry>; 
     public class TaggersManager 
     {
+
+        public TaggersManager(TagsManager tagsManager)
+        {
+            _tagsManager = tagsManager;
+        }
         public TaggedBankEntry Process(in BankDataEntry bankDataEntry)
         {
             List<Tag> tagList = new List<Tag>();
@@ -21,95 +26,66 @@ namespace Processors.Taggers
             return new TaggedBankEntry(tagList);
         }
 
-        public void Load(string taggersFileName) 
+        public void LoadFromJson(string jsonFileName) 
         {
-                TaggersJsonLoader jsonLoader = new TaggersJsonLoader();
-                TaggerJson? taggerJson = jsonLoader.loadJson(taggersFileName);
-                if (taggerJson != null)
-                {
-                    if ( taggerJson.Tags != null)
-                    {
-                        foreach (JsonTag jsonTag in taggerJson.Tags)
-                        {
-                            string? name = jsonTag.Name;
-                            string? description = jsonTag.Description;
-                            if (!String.IsNullOrEmpty(name) && (description != null))
-                            {
-                                TagsList.Add(new Tag (name, description));
-                            }
-                        }
-                    }
-
-                    if (taggerJson.Taggers != null)
-                    {
-                        foreach (JsonTagger jsonTagger in taggerJson.Taggers)
-                        {
-                            string? Name = jsonTagger.Name;
-                            int? Weight = jsonTagger.Weight;
-
-                            if (Name != null && Weight != null)
-                            {
-                                List<TaggerTest> testsList = new List<TaggerTest>();
-                                List<Tag> tagsList = new List<Tag>();
-
-                                if (jsonTagger.Tags != null)
-                                {
-                                    foreach (string tagName in jsonTagger.Tags)
-                                    {
-                                        Tag? tag = GetTagByName(tagName);
-                                        if (tag != null)
-                                        {
-                                            tagsList.Add(tag.Value);
-                                        }
-                                    }
-                                }
-
-                                if (jsonTagger.Tests != null)
-                                {
-                                    foreach (JsonTest jsonTest in jsonTagger.Tests)
-                                    {
-                                        string? testName = jsonTest.Name;
-                                        string? testTextSub = jsonTest.TextSub;
-                                        if (testName != null && testTextSub != null)
-                                        {
-                                            TaggerTest iTagTest = new TaggerTest
-                                            {
-                                                Name = testName,
-                                                TextSub = testTextSub
-                                            };
-
-                                            testsList.Add(iTagTest);
-                                        }
-                                    }
-                                }
-
-                                Tagger tagger = new Tagger (tagsList, testsList)
-                                {
-                                    Name = Name,
-                                    Weight = Weight.Value
-                                };
-
-                                TaggersList.Add(tagger);
-                            }
-                        }
-                    }
-                }
-        }
-
-        public Tag? GetTagByName(string Name) 
-        {
-            foreach (Tag tag in TagsList)
+            TaggersJsonLoader jsonLoader = new TaggersJsonLoader();
+            IList<JsonTagger>? JsonTaggersList = jsonLoader.loadJson(jsonFileName);
+            if (JsonTaggersList != null)
             {
-                if (tag.Name == Name)
+                foreach (JsonTagger jsonTagger in JsonTaggersList)
                 {
-                    return tag;
+                    string? Name = jsonTagger.Name;
+                    int? Weight = jsonTagger.Weight;
+
+                    if (Name != null && Weight != null)
+                    {
+                        List<TaggerTest> testsList = new List<TaggerTest>();
+                        List<Tag> tagsList = new List<Tag>();
+
+                        if (jsonTagger.Tags != null)
+                        {
+                            foreach (string tagName in jsonTagger.Tags)
+                            {
+                                Tag? tag = _tagsManager.GetTagByName(tagName);
+                                if (tag != null)
+                                {
+                                    tagsList.Add(tag.Value);
+                                }
+                            }
+                        }
+
+                        if (jsonTagger.Tests != null)
+                        {
+                            foreach (JsonTest jsonTest in jsonTagger.Tests)
+                            {
+                                string? testName = jsonTest.Name;
+                                string? testTextSub = jsonTest.TextSub;
+                                if (testName != null && testTextSub != null)
+                                {
+                                    TaggerTest iTagTest = new TaggerTest
+                                    {
+                                        Name = testName,
+                                        TextSub = testTextSub
+                                    };
+
+                                    testsList.Add(iTagTest);
+                                }
+                            }
+                        }
+
+                        Tagger tagger = new Tagger (tagsList, testsList)
+                        {
+                            Name = Name,
+                            Weight = Weight.Value
+                        };
+
+                        TaggersList.Add(tagger);
+                    }
                 }
             }
-
-            return null;
         }
 
-        private List<Tag> TagsList = new List<Tag>();
         private List<Tagger> TaggersList = new List<Tagger>();
+        private readonly TagsManager _tagsManager;
     }
 }

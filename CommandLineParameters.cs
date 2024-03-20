@@ -9,8 +9,9 @@ namespace Program
         NO_ERROR = 0,
         NO_INPUT_FILES = 1,
         INVALID_INPUT_FILE = 2,
-        NO_TAGGERS_FILE = 3,
-        INVALID_REPORT_ORDER = 4,
+        NO_TAGS_FILE = 3,
+        NO_TAGGERS_FILE = 4,
+        INVALID_REPORT_ORDER = 5,
     }
 
     public readonly record struct BuildCommandLineParamsResult
@@ -77,14 +78,17 @@ namespace Program
     public record class CommandLineParams
     {
         public List<string> InputFiles {get; init;} = new List<string>();
+
+        public string TagsFileName {get; init;} = "";
         public string TaggerFileName {get; init;} = "";
 
         public ReportParamOrderEnum ReportParamOrder {get; init;}
         public static BuildCommandLineParamsResult BuildCommandLineParamsFromArgs(string[] args)
         {
             const int PROCESSING_INPUT_FILES = 1;
-            const int PROCESSING_TAGGER_FILE = 2;
-            const int PROCESSING_REPORT_PARAM_ORDER = 3;
+            const int PROCESSING_TAGS_DILE = 2;
+            const int PROCESSING_TAGGER_FILE = 3;
+            const int PROCESSING_REPORT_PARAM_ORDER = 4;
 
             ReportParamOrderEnum reportParamOrder = ReportParamOrderEnum.NO_ORDER;
 
@@ -92,6 +96,7 @@ namespace Program
 
             List<string> inputFiles = new List<string>();
             string taggerFileName = "taggers.json";
+            string tagsFileName = "tags.json";
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -101,7 +106,10 @@ namespace Program
                     case "-a":
                         processingState = PROCESSING_INPUT_FILES;
                         break;
-                    case "-t":
+                    case "-tg":
+                        processingState = PROCESSING_TAGS_DILE;
+                        break;
+                    case "-tgr":
                         processingState = PROCESSING_TAGGER_FILE;
                         break;
                     case "-o":
@@ -117,6 +125,10 @@ namespace Program
                                     return new BuildCommandLineParamsResult(BuildCommandLineParamsErrorEnum.INVALID_INPUT_FILE, null, possibleFile);
                                 }
                                 inputFiles.Add(possibleFile);
+                                break;
+
+                            case PROCESSING_TAGS_DILE:
+                                tagsFileName = possibleCommand;
                                 break;
 
                             case PROCESSING_TAGGER_FILE:
@@ -152,10 +164,15 @@ namespace Program
                 
             }
 
+            if (!File.Exists(tagsFileName))
+            {
+                return new BuildCommandLineParamsResult(BuildCommandLineParamsErrorEnum.NO_TAGS_FILE, null, tagsFileName);
+            }
+
             if (!File.Exists(taggerFileName))
             {
                 return new BuildCommandLineParamsResult(BuildCommandLineParamsErrorEnum.NO_TAGGERS_FILE, null, taggerFileName);
-            }  
+            }
 
             if (inputFiles.Count() == 0)
             {
@@ -170,6 +187,7 @@ namespace Program
                 new CommandLineParams
                 {
                     InputFiles = inputFiles,
+                    TagsFileName = tagsFileName,
                     TaggerFileName = taggerFileName,
                     ReportParamOrder = reportParamOrder,
                 },

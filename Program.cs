@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Linq.Expressions;
 using BankData;
 using Processors;
+using Processors.Tags;
+using Processors.Taggers;
 using Reports.TextReports;
+
 namespace Program 
 {
     public static class Program 
@@ -28,9 +30,15 @@ namespace Program
                 return 0;
             }
 
+            TagsManager tagsManager = new TagsManager();
+            tagsManager.LoadFromJson(commandLineParams.TagsFileName);
+
+            TaggersManager taggersManager = new TaggersManager(tagsManager);
+            taggersManager.LoadFromJson(commandLineParams.TaggerFileName);            
+
             ProcessorsManager processorsManager = new ProcessorsManager();
 
-            List<ProcessedBankData> processedBankDataList = processorsManager.Process(bankEntryList, commandLineParams.TaggerFileName);
+            List<ProcessedBankData> processedBankDataList = processorsManager.Process(bankEntryList, taggersManager);
 
             if (bankEntryList.Count == 0) 
             {
@@ -42,7 +50,7 @@ namespace Program
             ITextReportBackend textReportConsoleBackEnd = new TextReportConsoleBackEnd();
 
             ITextReport textReport = new GeneralTextReport();
-            textReport.Generate(processedBankDataList, textReportFileBackEnd);
+            //textReport.Generate(processedBankDataList, textReportFileBackEnd);
             textReport.Generate(processedBankDataList, textReportConsoleBackEnd);
     
             return 0;

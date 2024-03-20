@@ -1,13 +1,14 @@
 using System;
 using BankData;
+using Processors.Tags;
 
 namespace Processors.Taggers
 {
     using BankEntryList = List<BankDataEntry>; 
     using TaggedBankEntryList = List<TaggedBankEntry>;
 
-    public class Tagger {
-
+    public class Tagger 
+    {
         public string Name {get; set;} = "";
         public int Weight {get; set;} = 0;
 

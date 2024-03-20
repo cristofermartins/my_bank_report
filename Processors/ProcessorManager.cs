@@ -9,13 +9,9 @@ namespace Processors
     {
         public ProcessorsManager() {}
 
-        public List<ProcessedBankData> Process(in List<BankDataEntry> bankDataEntryList, string taggersFileName)
+        public List<ProcessedBankData> Process(in List<BankDataEntry> bankDataEntryList, TaggersManager taggersManager)
         {
             List<ProcessedBankData> ret = new List<ProcessedBankData>();
-
-            TaggersManager taggersManager = new TaggersManager();
-
-            taggersManager.Load(taggersFileName);
 
             SpentTypeProcessor spentTypeProcessor = new SpentTypeProcessor();
 

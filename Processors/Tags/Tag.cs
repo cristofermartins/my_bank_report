@@ -1,4 +1,4 @@
-namespace Processors.Taggers
+namespace Processors.Tags
 {
     public readonly record struct Tag
     {
