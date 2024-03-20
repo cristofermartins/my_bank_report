@@ -58,6 +58,16 @@ namespace BankData.Parsers
                                         double value = 0D;
                                         if (Double.TryParse(cell[02].GetText(), out value))
                                         {
+                                            if (stringID.Contains("atraso"))
+                                            {
+                                                continue;
+                                            }
+
+                                            if (stringID.Contains("Pagamento em"))
+                                            {
+                                                continue;
+                                            }
+
                                             BankDataEntry bankDataEntry = new BankDataEntry 
                                             {
                                                 Value = -value,
@@ -69,7 +79,7 @@ namespace BankData.Parsers
                                         {
                                             foreach (var c in cell)
                                             {
-                                                Console.WriteLine(c.GetText());
+                                                //Console.WriteLine(c.GetText());
                                             }
                                         }
                                     }
